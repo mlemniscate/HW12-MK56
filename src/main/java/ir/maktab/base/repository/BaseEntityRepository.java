@@ -2,6 +2,7 @@ package ir.maktab.base.repository;
 
 import ir.maktab.base.domain.BaseEntity;
 
+import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,4 +20,5 @@ public interface BaseEntityRepository<E extends BaseEntity<ID>, ID extends Seria
 
     Long countAll();
 
+    EntityManager getEntityManager();
 }

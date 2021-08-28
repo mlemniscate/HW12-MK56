@@ -58,4 +58,9 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity<ID>, ID exte
         criteriaQuery.select(criteriaBuilder.count(root));
         return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
+
+    @Override
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 }
