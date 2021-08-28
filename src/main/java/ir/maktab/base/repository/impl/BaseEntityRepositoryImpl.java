@@ -13,9 +13,11 @@ import java.util.List;
 public abstract class BaseEntityRepositoryImpl<E extends BaseEntity<ID>, ID extends Serializable> implements BaseEntityRepository<E, ID> {
 
     protected final EntityManager entityManager;
+    private final CriteriaBuilder criteriaBuilder;
 
     public BaseEntityRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
+        this.criteriaBuilder = entityManager.getCriteriaBuilder();
     }
 
     public abstract Class<E> getEntityClass();
@@ -32,17 +34,20 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity<ID>, ID exte
 
     @Override
     public E findById(ID id) {
-        return null;
+        return entityManager.find(getEntityClass(), id);
     }
 
     @Override
     public List<E> findAll() {
-        return null;
+        CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(getEntityClass());
+        Root<E> root = criteriaQuery.from(getEntityClass());
+        criteriaQuery.select(root);
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     @Override
     public void delete(E e) {
-
+        entityManager.remove(e);
     }
 
     @Override
@@ -52,7 +57,6 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity<ID>, ID exte
 
     @Override
     public Long countAll() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
         Root<E> root = criteriaQuery.from(getEntityClass());
         criteriaQuery.select(criteriaBuilder.count(root));
