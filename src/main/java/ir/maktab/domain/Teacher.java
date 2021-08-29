@@ -2,9 +2,8 @@ package ir.maktab.domain;
 
 import ir.maktab.base.domain.Person;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = Teacher.TABLE_NAME)
@@ -20,6 +19,8 @@ public class Teacher extends Person<Long> {
     @Column(name = SALARY)
     private Double salary;
 
+    @ManyToMany(mappedBy = "teachers")
+    private Set<Student> students;
     public Teacher() {
     }
 
