@@ -3,6 +3,7 @@ package ir.maktab.domain;
 import ir.maktab.base.domain.Person;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,7 +21,7 @@ public class Teacher extends Person<Long> {
     private Double salary = 500d;
 
     @ManyToMany(mappedBy = "teachers")
-    private Set<Student> students;
+    private Set<Student> students = new HashSet<>();
     public Teacher() {
     }
 
@@ -42,4 +43,11 @@ public class Teacher extends Person<Long> {
         }
     }
 
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 }
