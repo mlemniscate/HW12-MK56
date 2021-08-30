@@ -3,6 +3,7 @@ package ir.maktab.domain;
 import ir.maktab.base.domain.Person;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,11 @@ public class Student extends Person<Long> {
     private Set<Teacher> teachers;
 
     public Student() {
+    }
+
+    public Student(String firstName, String lastName, Date birthday, String studentCode) {
+        super(firstName, lastName, birthday);
+        this.studentCode = studentCode;
     }
 
     public String getStudentCode() {

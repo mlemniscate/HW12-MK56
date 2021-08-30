@@ -17,7 +17,7 @@ public class Teacher extends Person<Long> {
     private String teacherCode;
 
     @Column(name = SALARY)
-    private Double salary;
+    private Double salary = 500d;
 
     @ManyToMany(mappedBy = "teachers")
     private Set<Student> students;
@@ -37,7 +37,9 @@ public class Teacher extends Person<Long> {
     }
 
     public void setSalary(Double salary) {
-        this.salary = salary;
+        if(salary > 0) {
+            this.salary = salary;
+        }
     }
 
 }

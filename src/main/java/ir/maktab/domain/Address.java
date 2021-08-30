@@ -2,22 +2,20 @@ package ir.maktab.domain;
 
 import ir.maktab.base.domain.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = Address.TABLE_NAME)
 public class Address extends BaseEntity<Long> {
 
-    public static final String TABLE_NAME = "address_list";
+    public static final String TABLE_NAME = "addresses";
     public static final String NUMBER = "number";
     public static final String STATE = "state";
     public static final String CITY = "city";
     public static final String POSTAL_ADDRESS = "postal_address";
     public static final String POSTAL_CODE = "postal_code";
 
-    @Column(name = NUMBER)
+    @Column(name = NUMBER, nullable = false)
     private String number;
     @Column(name = STATE)
     private String state;
@@ -28,7 +26,23 @@ public class Address extends BaseEntity<Long> {
     @Column(name = POSTAL_CODE)
     private String postalCode;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
+
+    @OneToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+
     public Address() {
+    }
+
+    public Address(String number, String state, String city, String postalAddress, String postalCode) {
+        this.number = number;
+        this.state = state;
+        this.city = city;
+        this.postalAddress = postalAddress;
+        this.postalCode = postalCode;
     }
 
     public String getNumber() {
@@ -69,5 +83,21 @@ public class Address extends BaseEntity<Long> {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
