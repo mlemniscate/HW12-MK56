@@ -35,5 +35,17 @@ public class ApplicationContext {
         TEACHER_REPOSITORY = new TeacherRepositoryImpl(entityManager);
         TEACHER_SERVICE = new TeacherServiceImpl(TEACHER_REPOSITORY);
     }
+
+    public static AddressService getAddressService() {
+        return ADDRESS_SERVICE;
+    }
+
+    public static StudentService getStudentService() {
+        return STUDENT_SERVICE;
+    }
+
+    public static TeacherService getTeacherService() {
+        return TEACHER_SERVICE;
+    }
 }
 
