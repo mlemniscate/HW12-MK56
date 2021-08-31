@@ -3,6 +3,7 @@ package ir.maktab;
 import com.github.javafaker.Faker;
 import ir.maktab.domain.Student;
 import ir.maktab.domain.Teacher;
+import ir.maktab.util.ApplicationContext;
 import ir.maktab.util.HibernateUtil;
 
 import javax.persistence.EntityManager;
@@ -12,13 +13,16 @@ import java.util.stream.IntStream;
 public class MainApp {
     public static void main(String[] args) {
         EntityManager entityManager = HibernateUtil.getEntityManagerFactory().createEntityManager();
-        enterStudents(entityManager);
-        enterStudents(entityManager);
-        enterStudents(entityManager);
-        enterStudents(entityManager);
+//        enterStudentsTeachers(entityManager);
+//        enterStudentsTeachers(entityManager);
+//        enterStudentsTeachers(entityManager);
+        System.out.println(ApplicationContext.getStudentService().existsById(13L));
     }
 
-    public static void enterStudents(EntityManager entityManager) {
+    private static void enterAddresses() {
+    }
+
+    public static void enterStudentsTeachers(EntityManager entityManager) {
         Faker faker = new Faker();
         Teacher teacher1 = teacherCreate(faker);
         Teacher teacher2 = teacherCreate(faker);

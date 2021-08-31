@@ -54,7 +54,7 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity<ID>, ID exte
     public boolean existsById(ID id) {
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
         Root<E> root = criteriaQuery.from(getEntityClass());
-        criteriaQuery.select(criteriaBuilder.count(criteriaBuilder.equal(root.get("id"), id)));
+        criteriaQuery.select(criteriaBuilder.count(root)).where(criteriaBuilder.equal(root.get("id"), id));
         return entityManager.createQuery(criteriaQuery).getSingleResult() > 0;
     }
 
