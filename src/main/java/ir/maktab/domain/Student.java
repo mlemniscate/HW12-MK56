@@ -48,4 +48,9 @@ public class Student extends Person<Long> {
     public void setStudentCode(String studentCode) {
         this.studentCode = studentCode;
     }
+
+    @Override
+    public String toString() {
+        return getFirstName() + " " + getLastName() + ", " + getBirthday() + ", " + getStudentCode() + "\n";
+    }
 }
