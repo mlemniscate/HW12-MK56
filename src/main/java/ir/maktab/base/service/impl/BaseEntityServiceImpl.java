@@ -6,6 +6,7 @@ import ir.maktab.base.service.BaseEntityService;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseEntityServiceImpl<E extends BaseEntity<ID>, ID extends Serializable, R extends BaseEntityRepository<E, ID>> implements BaseEntityService<E, ID> {
 
@@ -24,7 +25,7 @@ public abstract class BaseEntityServiceImpl<E extends BaseEntity<ID>, ID extends
     }
 
     @Override
-    public E findById(ID id) {
+    public Optional<E> findById(ID id) {
         return repository.findById(id);
     }
 

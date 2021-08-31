@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseEntityRepositoryImpl<E extends BaseEntity<ID>, ID extends Serializable> implements BaseEntityRepository<E, ID> {
 
@@ -33,8 +34,10 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity<ID>, ID exte
     }
 
     @Override
-    public E findById(ID id) {
-        return entityManager.find(getEntityClass(), id);
+    public Optional<E> findById(ID id) {
+        E e = entityManager.find(getEntityClass(), id);
+        Optional<E> optional = Optional.of(e);
+        return optional;
     }
 
     @Override
